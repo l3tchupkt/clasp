@@ -1,0 +1,242 @@
+# Changelog
+
+## [3.3.0](https://github.com/google/clasp/compare/v3.2.0...v3.3.0) (2026-03-11)
+
+
+### Features
+
+* **push:** add timestamp to push success message ([#896](https://github.com/google/clasp/issues/896)) ([#1127](https://github.com/google/clasp/issues/1127)) ([8bccc4e](https://github.com/google/clasp/commit/8bccc4e1501e8cc99e9188d515f40e56cf923c67))
+* support explicit project, clasp, and extra login scopes ([#1122](https://github.com/google/clasp/issues/1122)) ([811ed60](https://github.com/google/clasp/commit/811ed607ad62f29ea98f40d4537a7fb18467e5ed))
+
+
+### Bug Fixes
+
+* correct typos in src/auth/auth.ts ([#1132](https://github.com/google/clasp/issues/1132)) ([af09d60](https://github.com/google/clasp/commit/af09d60641a18c5c36cba63f13f926d81adc2b70))
+* detect SERVER_JS basename conflicts ([#1120](https://github.com/google/clasp/issues/1120)) ([f3d9e99](https://github.com/google/clasp/commit/f3d9e99e5934dd346672b97a5c769caccecb4500))
+* Fix incorrect storage of id_token, add missing awaits for some async operations( [#1121](https://github.com/google/clasp/issues/1121)) ([b0fa745](https://github.com/google/clasp/commit/b0fa7453c81fe88e58e10e7fa80ba3fd63746d01))
+* honor skipSubdirectories in project config ([#1117](https://github.com/google/clasp/issues/1117)) ([732db4c](https://github.com/google/clasp/commit/732db4c268210f954fcc61754e74980aa209650c))
+* normalize paths for filePushOrder matching ([#1131](https://github.com/google/clasp/issues/1131)) ([8c7dc52](https://github.com/google/clasp/commit/8c7dc52e1b1a437d4906aeb7972474e77b00b5e4))
+
+## [3.2.0](https://github.com/google/clasp/compare/v3.1.3...v3.2.0) (2026-02-01)
+
+
+### Features
+
+* add Claude Code CLI support ([#1111](https://github.com/google/clasp/issues/1111)) ([56f0e62](https://github.com/google/clasp/commit/56f0e6274c2daa2c0928d44fe50c517b188c11f5))
+* Add support for comments in project settings file ([#1102](https://github.com/google/clasp/issues/1102)) ([64acdc2](https://github.com/google/clasp/commit/64acdc20e8e40f736d56a3c2c2eaaff4727fb25a))
+* Support custom port for no-localhost login ([#1104](https://github.com/google/clasp/issues/1104)) ([833eb7c](https://github.com/google/clasp/commit/833eb7cc5d7fecfca5fc8e2a7c9cdb837f56d38f))
+
+
+### Bug Fixes
+
+* Improve validation of credential files ([511a060](https://github.com/google/clasp/commit/511a0604bdd922795c6d2ee6ecc32b2b74d1d0d3))
+* (SECURITY) prevent path traversal in remote file synchronization ([#1109](https://github.com/google/clasp/issues/1109)) ([ba6bd66](https://github.com/google/clasp/commit/ba6bd666fe74de54950122b5d92ecf1dcc02a9d3))
+
+## [3.1.3](https://github.com/google/clasp/compare/v3.1.2...v3.1.3) (2025-11-19)
+
+
+### Bug Fixes
+
+* Add back redirect port to login cmd to be consistent with current documentation ([#1094](https://github.com/google/clasp/issues/1094)) ([9e8f717](https://github.com/google/clasp/commit/9e8f717f0c6be4684157000a2315b4ff104b9a07))
+* Gemini CLI Extension Path Issue ([#1097](https://github.com/google/clasp/issues/1097)) ([b466c57](https://github.com/google/clasp/commit/b466c57c08fe5c4e4526b99ccd6c0db4a989d447))
+
+## [3.1.1](https://github.com/google/clasp/compare/v3.1.0...v3.1.1) (2025-10-31)
+
+
+### Features
+
+* Add config file to make repo a Gemini CLI extension ([#1090](https://github.com/google/clasp/issues/1090)) ([3b4bb8a](https://github.com/google/clasp/commit/3b4bb8a0c861c514560ddc95c74e8b90b3a95435))
+
+
+### Bug Fixes
+
+* Separated URL from prompt message to help terminals better detect URL to make it clickable ([#1089](https://github.com/google/clasp/issues/1089)) ([9d59aa1](https://github.com/google/clasp/commit/9d59aa13eb9d143cac6d13de8e7f8c864f8a5c7e))
+* update Gemini CLI extension config file ([#1092](https://github.com/google/clasp/issues/1092)) ([62e0dac](https://github.com/google/clasp/commit/62e0dace07756c5154f88979797a00e9d84ae403))
+
+## [3.1.0](https://github.com/google/clasp/compare/v3.0.6-alpha...v3.1.0) (2025-10-15)
+
+
+### Features
+
+* Add `delete` command ([#1050](https://github.com/google/clasp/pull/1059) ([3173db0](https://github.com/google/clasp/commit/3173db037fc0bc4c381a36b914ad7c2ae4877fee))
+* Add script id option to list commands ([#1060)(https://github.com/google/clasp/pull/1066) ([4579421](https://github.com/google/clasp/commit/45794213d5bc735571cb89141b481d0ec4262838))
+* Make --json flag global ([#1074](https://github.com/google/clasp/pull/1074) ([a415260](https://github.com/google/clasp/commit/a41526095234a91a8ded7f4095882afca02ae4b3))
+
+### Bug Fixes
+
+* handle unknown severity levels in logs ([#1081](https://github.com/google/clasp/issues/1081)) ([79fb283](https://github.com/google/clasp/commit/79fb28365c11810e9e4bf5d56d12f2ffee2335b8))
+* Assorted documentation fixes
+
+## [3.0.6-alpha](https://github.com/google/clasp/compare/v3.0.5-alpha...v3.0.6-alpha) (2025-05-30)
+
+
+### Bug Fixes
+
+* Add missing commands ([#1063](https://github.com/google/clasp/issues/1063)) ([ec9184f](https://github.com/google/clasp/commit/ec9184f6535a4c042d27f7fccb6e453683aad7f1))
+* check if local path's dirname is not root ([#1061](https://github.com/google/clasp/issues/1061)) ([c4f02dd](https://github.com/google/clasp/commit/c4f02dd70c3a5ddb7e7dcf6d278fb0431c8b717f))
+* lint ([a289881](https://github.com/google/clasp/commit/a2898814b47a6392111bdb3daa774cf3fdae71b2))
+
+## [3.0.5-alpha](https://github.com/google/clasp/compare/v3.0.4-alpha...v3.0.5-alpha) (2025-05-30)
+
+
+### Features
+
+* Add -d option to delete files removed in the server script ([#291](https://github.com/google/clasp/issues/291)). ([bf03b1d](https://github.com/google/clasp/commit/bf03b1d77e841b837b30e043e98883902f227739))
+* Experimental mcp command to run clasp as an MCP server for use with coding agents ([ed90dbc](https://github.com/google/clasp/commit/ed90dbcf45d03985c381dfa945f5142178822c54))
+
+## [3.0.4-alpha](https://github.com/google/clasp/compare/v3.0.3-alpha...v3.0.4-alpha) (2025-05-09)
+
+
+### Bug Fixes
+
+* Normalize file paths in file operations for Windows compatibility ([#1044](https://github.com/google/clasp/issues/1044)) ([edd619f](https://github.com/google/clasp/commit/edd619fb92da07a960beadd14b7de5a0f96f0e25))
+
+## [3.0.3-alpha](https://github.com/google/clasp/compare/v3.0.2-alpha...v3.0.3-alpha) (2025-03-25)
+
+
+### Bug Fixes
+
+* Add breaking change not to readme about --rootDir option behavior ([#1046](https://github.com/google/clasp/issues/1046)) ([23c0e88](https://github.com/google/clasp/commit/23c0e885cbbf7d13fa59387136a9cec29301b12b))
+* Correctly ignore errors fetching userinfo when logging in with custom creds. ([#1040](https://github.com/google/clasp/issues/1040)) ([6c894f2](https://github.com/google/clasp/commit/6c894f210f96d07a6992a997ddc21e93b0e3b387))
+* Correctly output container URL ([#1046](https://github.com/google/clasp/issues/1046)) ([e9be2c0](https://github.com/google/clasp/commit/e9be2c0c70ee18b7274afe8e8fe9910d70d6c25c))
+* Ensure parent ID is saved in .clasp.json ([e2e902c](https://github.com/google/clasp/commit/e2e902c9335cc13859bda81ab7248b9331df4a81))
+* Fix duplicate output of some error messages ([82e921f](https://github.com/google/clasp/commit/82e921fb4f28d71002a77cd617a5a1e72eadb69b))
+* Fix issue with push --watch terminating early ([#1045](https://github.com/google/clasp/issues/1045)) ([0e114f2](https://github.com/google/clasp/commit/0e114f2fc53d1c30d0fcf191b76ea007a29ff7ff))
+* Output parent URL when creating scripts if available ([#1046](https://github.com/google/clasp/issues/1046)) ([64d8c33](https://github.com/google/clasp/commit/64d8c33b35f01250902bcfe574f2aa53e0dd65df))
+* Remove other instance of .claspignore file warning as now obsolete ([0b29163](https://github.com/google/clasp/commit/0b291637b2bb26ddf00094d6773bd100c4a59ae8))
+* Skip micromatch when ignore file is empty ([#1043](https://github.com/google/clasp/issues/1043)) ([121dd26](https://github.com/google/clasp/commit/121dd260a7539cf3d51a406b6752dec9e5ff0beb))
+* Update documentation on how to accomodate policy restrictions on 3P apps ([#940](https://github.com/google/clasp/issues/940)) ([e35cb84](https://github.com/google/clasp/commit/e35cb84098da4658b91ad934bca5810a3f4a242e))
+* Update run instructions for 3.x ([f75059e](https://github.com/google/clasp/commit/f75059e83df85ba043a299393a4d5611e0c77eb5))
+
+## [3.0.2-alpha](https://github.com/google/clasp/compare/v3.0.1-alpha1...v3.0.2-alpha) (2025-03-14)
+
+
+### Features
+
+* Add file extension settings for HTML ([e4dd863](https://github.com/google/clasp/commit/e4dd863de347e3f1747d7aff283432e9f8eb4697))
+* Display logs in local time ([8952aff](https://github.com/google/clasp/commit/8952aff81abc986788c1e4daca8c416ee3813d7f))
+* Move pdate deployment into a separate command ([#752](https://github.com/google/clasp/issues/752)) ([e4dd025](https://github.com/google/clasp/commit/e4dd025377b8961dfbd8ce5170112563d40f5ff1))
+
+
+### Bug Fixes
+
+* Clarify filePushOrder behavior ([eea22cb](https://github.com/google/clasp/commit/eea22cba387fd92e571d7c1ebe322be1c360972a))
+* Fix create-script command/alias names ([55a33c6](https://github.com/google/clasp/commit/55a33c6a4780172c16ff8ee7316631787c9f13e5))
+* Suppress punycode deprecation warning temporarily until dependencies updated ([ec352e5](https://github.com/google/clasp/commit/ec352e57c3184a23dd203f1468f7ecbfa820cc98))
+* Tighten result check on run to correctly output falsy values [#770](https://github.com/google/clasp/issues/770) ([0a3947b](https://github.com/google/clasp/commit/0a3947ba6a6f14cfcbf7f8693949044064eb2738))
+* Update run instructions to correct oauth client type ([#997](https://github.com/google/clasp/issues/997)) ([55793c9](https://github.com/google/clasp/commit/55793c9b2eaf762ac93283c64b032ab84efb1c5d))
+
+
+### Miscellaneous Chores
+
+* Release 3.0.2-alpha ([e820d08](https://github.com/google/clasp/commit/e820d08667787a4a8dae2cc8a514b886a31195fc))
+
+## [3.0.1-alpha1](https://github.com/google/clasp/compare/v3.0.0-alpha1...v3.0.1-alpha1) (2025-03-11)
+
+
+### Bug Fixes
+
+* Add missing import from "open", not caught by typescript due to being browser api ([907d80f](https://github.com/google/clasp/commit/907d80f9e5d81dde387c783a86553134bf219a64))
+
+## [3.0.0-alpha1](https://github.com/google/clasp/compare/v3.0.0-alpha...v3.0.0-alpha1) (2025-03-11)
+
+
+### Miscellaneous Chores
+
+* Release 3.0.0-alpha1 ([483a075](https://github.com/google/clasp/commit/483a0755a6d66125e0efa59bac2d3e9cb12f5a7b))
+
+## [3.0.0-alpha](https://github.com/google/clasp/compare/v2.5.0...v3.0.0-alpha) (2025-03-11)
+
+### ⚠ BREAKING CHANGES
+
+* CLI syntax changed for some commands. Flattens the command structure so it is consistent.
+* Typescript is no longer transpiled by clasp. Use Typescript + Rollup or another bundler to transpile code before pushing.
+* When using the --rootDir option to create or clone a script, the `.clasp.json` file is always created in the current working directory and the relative path to the specified directory is saved in the .clasp.json file.
+
+### Features
+
+* Added `--user` option to allow easy switching between authorized users.
+
+### Bug Fixes
+
+* Don't write files on clone if unable to fetch proejct ([#824](https://github.com/google/clasp/issues/824)) ([5f7e06f](https://github.com/google/clasp/commit/5f7e06f565d11852108d330c03dada28895c22d7))
+* Speed up directory crawling ([588d1bc](https://github.com/google/clasp/commit/588d1bc8df14568bc3dd7d331f3adde44f784f9e))
+* Fix `--no-localhost` option during authorization
+
+## [2.5.0](https://github.com/google/clasp/compare/v2.4.2...v2.5.0) (2025-01-09)
+
+
+### Features
+
+* Add support for custom redirect port in clasp login ([#1020](https://github.com/google/clasp/issues/1020)) ([d55832e](https://github.com/google/clasp/commit/d55832e59d63c480ae591f7d1ecba457ebfafb7b))
+
+
+### Bug Fixes
+
+* Don't write files on clone if unable to fetch project ([#824](https://github.com/google/clasp/issues/824)) ([b3b292a](https://github.com/google/clasp/commit/b3b292acfcc9bb191a3f4171601b8c420c187546))
+* Rethrow error so command exits with error status ([#1019](https://github.com/google/clasp/issues/1019)) ([29ac629](https://github.com/google/clasp/commit/29ac62988b970b1905fe2601828bf7dcaac47b54))
+
+## [2.4.2](https://github.com/google/clasp/compare/v2.4.1...v2.4.2) (2022-09-26)
+
+
+### Bug Fixes
+
+* remove online check ([#936](https://github.com/google/clasp/issues/936)) ([6775d9f](https://github.com/google/clasp/commit/6775d9f674886ac11ee2a23d59cbe62dd141d97b))
+
+### [2.4.1](https://www.github.com/google/clasp/compare/v2.4.0...v2.4.1) (2021-08-09)
+
+
+### Bug Fixes
+
+* Don't require package.json for simple commands ([#840](https://www.github.com/google/clasp/issues/840)) ([#862](https://www.github.com/google/clasp/issues/862)) ([ad5d045](https://www.github.com/google/clasp/commit/ad5d045c431f1341cf79bcf18f150f0e9d11db55))
+* Fix saving credentials when refreshed. ([#863](https://www.github.com/google/clasp/issues/863)) ([48e6fa3](https://www.github.com/google/clasp/commit/48e6fa3354de635a3ea1ce089d481847b2e939e9))
+* Honor --project CLI option ([#865](https://www.github.com/google/clasp/issues/865)) ([deacf03](https://github.com/google/clasp/commit/deacf03d6d2d28abd9f3a408a77b69e99b9a59bf))
+* Shut down embedded server on login faster ([40e0b3d](https://github.com/google/clasp/commit/40e0b3d67c3d381d0f24d738781ed61a2622c477))
+
+
+## [2.4.0](https://www.github.com/google/clasp/compare/v2.3.1...v2.4.0) (2021-06-11)
+
+
+### Features
+
+* env & option based config files ([1b68374](https://www.github.com/google/clasp/commit/1b6837480b2e22cb8728cb80b2d8cfa36381d982))
+
+
+### Bug Fixes
+
+* unnecessary code caused `help` command to crash ([3741f71](https://www.github.com/google/clasp/commit/3741f71d744a2db8c5f1304c3426b253f8e742bd))
+
+
+### Miscellaneous Chores
+
+* switch from cjs to esm ([5055865](https://www.github.com/google/clasp/commit/5055865a28e48a654ffbb3b28212e53f484f76a4))
+
+
+### [2.3.2](https://www.github.com/google/clasp/compare/v2.3.0...v2.3.2) (2021-05-17)
+
+
+### Miscellaneous Chores
+
+* Republish 2.3.0 as 2.3.2 due to unintended breaking changes in 2.3.1
+
+
+### [2.3.1](https://www.github.com/google/clasp/compare/v2.3.0...v2.3.1) (2021-05-11)
+
+
+### Features
+
+* env & option based config files ([1b68374](https://www.github.com/google/clasp/commit/1b6837480b2e22cb8728cb80b2d8cfa36381d982))
+
+
+### Bug Fixes
+
+* Add missing find-up dependency ([#833](https://www.github.com/google/clasp/issues/833)) ([0c9c773](https://www.github.com/google/clasp/commit/0c9c773ff800be23aba2b32a049fec186c2e8507))
+* commander 6 option clash ([f2b7092](https://www.github.com/google/clasp/commit/f2b709260d4581ad5f5ac78121481824ab54f076))
+* commander 6 option clash ([#816](https://www.github.com/google/clasp/issues/816)) ([517a9d8](https://www.github.com/google/clasp/commit/517a9d8ff71c89f0665ae57903111529eb8d6dd7))
+* Make tests green again -- update commander version + minor adjustments. Also fix cleanup of tests to correctly restore credentials ([d526a9f](https://www.github.com/google/clasp/commit/d526a9fa9cc4975e27c3c153cad870ca3351b89b))
+
+
+### Miscellaneous Chores
+
+* Enable release-please workflow ([60b1e25](https://www.github.com/google/clasp/commit/60b1e25a343204ce6fbff9ce5a056b479d17bbe1))
+* Release 2.3.1 ([4322184](https://www.github.com/google/clasp/commit/432218430e9d1506f7a09d65893b83c951c529be))

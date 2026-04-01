@@ -1,0 +1,160 @@
+// Copyright 2025 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// This file implements the `AuthorizationCodeFlow` for local development
+// environments. It starts a local HTTP server to receive the authorization
+// code after the user grants permission.
+
+import {createServer} from 'http';
+import type {IncomingMessage, Server, ServerResponse} from 'http';
+import type {AddressInfo} from 'net';
+import {OAuth2Client} from 'google-auth-library';
+import open from 'open';
+import enableDestroy from 'server-destroy';
+import {intl} from '../intl.js';
+import {AuthorizationCodeFlow, parseAuthResponseUrl} from './auth_code_flow.js';
+
+/**
+ * Implements the Authorization Code Flow by starting a local HTTP server
+ * to act as the redirect URI. This is suitable for CLI environments
+ * where a browser can be opened and a local server can receive the
+ * authorization code.
+ */
+export class LocalServerAuthorizationCodeFlow extends AuthorizationCodeFlow {
+  protected server: Server | undefined;
+  protected port = 0;
+
+  constructor(oauth2client: OAuth2Client, port?: number) {
+    super(oauth2client);
+    this.port = port as number;
+  }
+
+  /**
+   * Starts a local HTTP server and returns its address as the redirect URI.
+   * The server will listen on the configured port (or a random available port if 0).
+   * @returns {Promise<string>} The local redirect URI (e.g., "http://localhost:1234").
+   * @throws {Error} If the server cannot be started (e.g., port in use).
+   */
+  async getRedirectUri(): Promise<string> {
+    this.server = await new Promise<Server>((resolve, reject) => {
+      const s = createServer();
+      enableDestroy(s); // Allows the server to be destroyed gracefully.
+      // Try to listen on the specified port (or a random one if port is 0).
+      s.listen(this.port, () => resolve(s)).on('error', (err: NodeJS.ErrnoException) => {
+        // Handle common server errors like port already in use.
+        if (err.code === 'EADDRINUSE') {
+          const msg = intl.formatMessage(
+            {
+              defaultMessage:
+                'Error: Port {port} is already in use. Please specify a different port with --redirect-port',
+            },
+            {
+              port: this.port,
+            },
+          );
+          console.error(msg);
+        } else {
+          const msg = intl.formatMessage(
+            {
+              defaultMessage: 'Error: Unable to start the server on port {port}',
+            },
+            {
+              port: this.port,
+              errorMessage: err.message,
+            },
+          );
+          console.error(msg, err.message);
+        }
+        reject(err);
+      });
+    });
+    const {port} = this.server.address() as AddressInfo;
+    return `http://localhost:${port}`;
+  }
+
+  /**
+   * Prompts the user to authorize by opening the provided authorization URL
+   * in their default web browser. It then waits for the local server (started by
+   * `getRedirectUri`) to receive the callback containing the authorization code.
+   * The returned state parameter is validated against the expected value to
+   * prevent CSRF attacks per RFC 6749 Section 10.12.
+   * @param {string} authorizationUrl - The URL to open for user authorization.
+   * @param {string} expectedState - The state value that must match the callback.
+   * @returns {Promise<string>} The authorization code extracted from the redirect.
+   * @throws {Error} If the server is not started, the request URL is missing, the
+   * state parameter is missing or does not match, or an error parameter is present
+   * in the redirect URL.
+   */
+  async promptAndReturnCode(authorizationUrl: string, expectedState: string) {
+    return await new Promise<string>((resolve, reject) => {
+      if (!this.server) {
+        reject(new Error('Server not started'));
+        return;
+      }
+      this.server.on('request', (request: IncomingMessage, response: ServerResponse) => {
+        if (!request.url) {
+          reject(new Error('Missing URL in request'));
+          return;
+        }
+        const {code, state, error} = parseAuthResponseUrl(request.url);
+
+        // Reject requests with an OAuth error from the authorization server.
+        if (error) {
+          const failMsg = intl.formatMessage({
+            defaultMessage: 'Authorization failed. Please try again.',
+          });
+          response.writeHead(400, {'Content-Type': 'text/plain'});
+          response.end(failMsg);
+          reject(new Error(error));
+          return;
+        }
+
+        // Validate the state parameter to prevent CSRF.
+        if (!state || state !== expectedState) {
+          const csrfMsg = intl.formatMessage({
+            defaultMessage: 'Authorization rejected: state parameter mismatch. This may indicate a CSRF attack.',
+          });
+          response.writeHead(400, {'Content-Type': 'text/plain'});
+          response.end(csrfMsg);
+          reject(new Error(csrfMsg));
+          return;
+        }
+
+        if (code) {
+          resolve(code); // Successfully obtained the authorization code.
+        } else {
+          reject(new Error('Missing authorization code'));
+        }
+        // Send a simple response to the browser.
+        const msg = intl.formatMessage({
+          defaultMessage: 'Logged in! You may close this page.',
+        });
+        response.end(msg);
+      });
+      // Open the authorization URL in the user's default browser.
+      void open(authorizationUrl);
+
+      // Log the authorization URL to the console as a fallback or for visibility.
+      const msg = intl.formatMessage(
+        {
+          defaultMessage: '`🔑 Authorize clasp by visiting this url:\n{url}\n',
+        },
+        {
+          url: authorizationUrl,
+        },
+      );
+      console.log(msg);
+    }).finally(() => this.server?.destroy()); // Ensure the server is destroyed after completion or error.
+  }
+}

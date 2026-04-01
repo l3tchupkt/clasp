@@ -1,0 +1,13 @@
+{
+  "extension": ["ts"],
+  "timeout": 20000,
+  "spec": "test/**/*.ts",
+  "require": [
+    "source-map-support/register.js"
+  ],
+  "import": "./ts-node.register.js",
+  "watch-files": [
+    "src",
+    "test"
+  ]
+}
